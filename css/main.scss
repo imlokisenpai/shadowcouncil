@@ -1,21 +1,35 @@
 ---
-
+// Shadow Council Customization Variables
 ---
-// Customization Variables
 
-$accent: #FF0F00;
+$accent: #00ff88;
+$accent-glow: #4a1a65;
+$dark-bg: #0a0a0a;
+$darker-bg: #050505;
+$text: #e0e0e0;
+$text-dim: #a0a0a0;
+$border: #333;
+$success: #00ff88;
+$warning: #ffaa00;
+$danger: #ff4444;
 
-$max-width: 740px;
-$med-width: 600px;
-$small-width: 480px;
+$max-width: 1200px;
+$med-width: 800px;
+$small-width: 650px;
 
 // Basic
 
 body {
     margin: 0;
-    font-family: "Inconsolata";
-    background-color: #FFFFDD;
+    font-family: "Courier New", monospace;
+    background-color: $dark-bg;
+    color: $text;
     min-height: 100%;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(42, 10, 69, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(10, 26, 42, 0.3) 0%, transparent 50%);
+    background-attachment: fixed;
+    line-height: 1.6;
 }
 a {
     text-decoration: none;
@@ -23,15 +37,18 @@ a {
 }
 a:hover {
     text-decoration: underline;
+    text-shadow: 0 0 10px $accent-glow;
 }
 hr {
-    margin: 5px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 20px 0;
+    border-top: 1px solid $border;
+    border-bottom: none;
 }
 code {
-    background-color: #d8e7ff;
-    color: #002b72;
+    background-color: rgba(42, 10, 69, 0.5);
+    color: $success;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 // divs
@@ -45,11 +62,19 @@ code {
 .container {
     max-width: $max-width;
     margin: auto;
+    padding: 0 20px;
 }
 
-// Navbar
+// Navbar - Converted to Shadow Council Header
 
 .navbar {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid $border;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
     ul {
         display: inline-block;
         margin: 0;
@@ -59,66 +84,134 @@ code {
     li {
         list-style-type: none;
         margin: 0 5px 0 10px;
+        display: inline-block;
     }
 
-    padding: 30px 0 20px 0;
+    padding: 20px 0;
+    
     .site-title{
-        font-size: 32px;
-        color: #272727;
+        font-size: 1.8rem;
+        background: linear-gradient(45deg, $text, $success);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px $accent-glow;
         display: inline-block;
+    }
+    
+    a {
+        color: $text-dim;
+        padding: 0.5rem 1rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    a:hover {
+        color: $text;
+        border-color: $accent;
+        text-decoration: none;
+        text-shadow: 0 0 10px $accent-glow;
     }
 }
 
-// index
+// index - Converted to Shadow Council Cards
+
 .post-card{
-    margin-top:1em;
-    margin-bottom:1em;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid $border;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, $accent-glow, transparent);
+        transition: left 0.5s ease;
+    }
+    
+    &:hover::before {
+        left: 100%;
+    }
+    
+    &:hover {
+        border-color: $accent-glow;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(74, 26, 101, 0.3);
+    }
+    
     .title{
         max-width: 500px;
-        color: #272727;
+        color: $success;
         display: inline-block;
-        font-size: 30px;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
     }
     .details{
         @extend .pull-right;
         text-align: right;
         margin-left: 20px;
-        font-size: 15px;
+        font-size: 0.9rem;
+        color: $text-dim;
     }
     .subtitle{
         max-width: 500px;
+        color: $text-dim;
     }
 }
 
 .no-post{
     text-align: center;
-    margin-top: 10px;
+    margin-top: 40px;
     font-style: italic;
+    color: $text-dim;
 }
 
 // pages
 
 .page-title{
     text-align: center;
-    font-size: xx-large;
+    font-size: 2.5rem;
     font-weight: bold;
-    line-height: 2;
+    line-height: 1.3;
+    margin: 2rem 0;
+    background: linear-gradient(45deg, $text, $success);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 .page-subtitle{
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+    color: $text-dim;
 }
 
-// footer
+// footer - Shadow Council Style
 
 .footer{
+    background: rgba(10, 10, 10, 0.95);
+    border-top: 1px solid $border;
+    margin-top: 3rem;
+    
     a {
-        color:black;
+        color: $text-dim;
     }
+    a:hover {
+        color: $text;
+    }
+    
     text-align: center;
     font-size: small;
-    margin-top: 2em;
-    margin-bottom: 1em;
+    padding: 2rem 0;
+    color: $text-dim;
 }
 
 // Mobile
@@ -144,7 +237,7 @@ code {
 @media (max-width: 500px) {
 	.navbar {
 		text-align: center;
-        padding: 50px 0px 0px 0px;
+        padding: 30px 0px 0px 0px;
         ul{
             padding: 10px 0 10px 0;
             margin: 0;
@@ -154,7 +247,8 @@ code {
             width: 100%;
         }
         li{
-            margin: 0;
+            margin: 5px;
+            display: block;
         }
         .pull-left{
             float: none;
@@ -162,24 +256,39 @@ code {
         .site-title{
             width: 100%;
             float: none;
+            font-size: 1.5rem;
         }
 	}
+    
+    .post-card {
+        .details {
+            float: none;
+            text-align: left;
+            margin: 10px 0 0 0;
+        }
+    }
 }
 
-//  typography
+//  typography - Dark Theme
 
 .content {
-    line-height: 1.5;
+    line-height: 1.6;
+    background: rgba(20, 20, 20, 0.5);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid $border;
+    
     h1, h2, h3, h4 {
         margin-block-start: 2em !important;
-        margin-block-end: 0em !important;
+        margin-block-end: 0.5em !important;
+        color: $success;
     }
     h1:after, h2:after, h3:after, h4:after {
         content: '';
         display: block;
         width: 50%;
-        border-top: 0.5px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 0.5px solid rgba(50, 50, 50, 0.3);
+        border-top: 1px solid $border;
+        margin: 10px 0 20px 0;
     }
 
     ol {
@@ -189,14 +298,16 @@ code {
         list-style-position: none;
         position: relative;
         list-style: none;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: $text;
     }
     ul > li {
-        margin: 5px 0 5px 0;
+        margin: 8px 0 8px 0;
+        color: $text;
     }
     ul {
-        padding: 0 20px 0 20px;;
+        padding: 0 20px 0 20px;
     }
     ol {
         padding: 0 30px 0 30px;
@@ -206,12 +317,15 @@ code {
         counter-increment: list;
         position: absolute;
         left: -30px;
+        color: $accent;
     }
     blockquote {
-        border-left: 5px solid #333333;
-        margin: 5px 0;
-        padding: 0px 8px;
+        border-left: 3px solid $accent;
+        margin: 15px 0;
+        padding: 10px 15px;
         font-style: italic;
+        background: rgba(42, 10, 69, 0.2);
+        color: $text-dim;
     }
     .profile-picture {
         width: 15%;
@@ -229,33 +343,36 @@ code {
     }
     img {
         text-align: center;
-        margin: 10px 10px 10px 10px;
-        max-width: $max-width;
+        margin: 15px auto;
+        max-width: 100%;
+        border-radius: 4px;
+        border: 1px solid $border;
+        display: block;
     }
 
     .color-red {
-        color: #FF0F00;
+        color: #ff4444;
     }
     .color-orange {
-        color: #eb9800;
+        color: #ffaa00;
     }
     .color-green {
-        color:#00eb1d;
+        color: #00ff88;
     }
     .color-blue{
         color: #0062ff;
     }
     .highlight-red {
-        background-color: #ffaaaa;
+        background-color: rgba(255, 68, 68, 0.2);
     }
     .highlight-orange {
-        background-color: #ffd486;
+        background-color: rgba(255, 170, 0, 0.2);
     }
     .highlight-green {
-        background-color: #aaffad;
+        background-color: rgba(0, 255, 136, 0.2);
     }
     .highlight-blue {
-        background-color: #d8e7ff;
+        background-color: rgba(0, 98, 255, 0.2);
     }
 }
 
@@ -264,32 +381,88 @@ table {
     border-collapse: collapse;
     width: 100%;
     padding: 0;
+    border: 1px solid $border;
 }
 table tr {
-    border-top: 1px solid #cccccc;
-    background-color: white;
+    border-top: 1px solid $border;
+    background-color: rgba(20, 20, 20, 0.8);
     margin: 0;
     padding: 0;
 }
 table tr:nth-child(2n) {
-    background-color: #f8f8f8;
+    background-color: rgba(30, 30, 30, 0.8);
 }
 table tr th {
     font-weight: bold;
-    border: 1px solid #cccccc;
+    border: 1px solid $border;
     text-align: left;
     margin: 0;
-    padding: 6px 13px;
+    padding: 10px 15px;
+    background: rgba(42, 10, 69, 0.5);
+    color: $success;
 }
 table tr td {
-    border: 1px solid #cccccc;
+    border: 1px solid $border;
     text-align: left;
     margin: 0;
-    padding: 6px 13px;
+    padding: 10px 15px;
+    color: $text;
 }
 table tr th :first-child, table tr td :first-child {
     margin: 0;
 }
 table tr th :last-child, table tr td :last-child {
     margin: 0;
+}
+
+// Shadow Council Specific Additions
+
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(20, 20, 20, 0.7);
+    border-radius: 10px;
+    margin: 2rem 0;
+    border: 1px solid $border;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(74, 26, 101, 0.1), transparent);
+    z-index: -1;
+}
+
+.grid {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.text-center { text-align: center; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.glow { text-shadow: 0 0 10px currentColor; }
+
+.admin-link {
+    background: $accent;
+    color: $dark-bg !important;
+    font-weight: bold;
+}
+
+.admin-link:hover {
+    background: $accent-glow;
+    color: $text !important;
 }
